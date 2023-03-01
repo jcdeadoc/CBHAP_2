@@ -1,0 +1,100 @@
+install styled-components no projeto
+
+=> Cria uma pasta src/Home
+dentro cria dois arquivos
+index.js
+styles.js
+
+=> Cria a pasta src/theme
+cria arquivos:
+index.js
+Dark.js
+Light.js
+
+
+=> No APP.js importar:
+
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import { useColorScheme } from 'react-native';
+
+import themes from './src/themes';
+import Home from './src/Home';
+
+export default function APP(){
+const deviceTheme = useColorScheme();
+const theme = themes[deviceTheme] || theme.dark;
+
+return(
+	<ThemeProvider theme={theme}>
+	  <Home />
+	</ ThemeProvider  
+	);
+}
+
+
+
+
+=> Na pasta src/Home
+
+***  Dentro de index.js
+import React from 'react';
+
+import { Viewname, Titlename} from './styles';
+
+export default function Home() {
+ return(
+	<Viewname>
+	<Titlename>
+		olá mundo
+	</ Viewname>
+	</ Titlename>
+	);
+}
+
+
+***  Dentro do styles.js
+import styled from 'styled-components/native';
+
+export const Viewname = Styled.View`
+	background: ${props => props.theme.background};
+	flex: 1;
+	align-items: center;
+	justify-content:center;
+`,
+
+export const Titlename = Styled.Text`
+	color: ${props => props.theme.color};
+	font-size: 44px;
+`,
+
+
+
+=> Na pasta src/theme
+
+***  No index.js
+
+import dark from './dark';
+import light from './light';
+
+export default { dark, light };
+
+
+
+
+***  No dark.js
+
+export default {
+	background: '#000',
+	color: '#fff',
+	}
+	
+
+
+
+***  No light.js
+
+export default {
+	background: '#fff',
+	color: '#000',
+	}
